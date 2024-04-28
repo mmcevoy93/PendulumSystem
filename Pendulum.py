@@ -14,7 +14,7 @@ class Pendulum:
         self.length = length
         self.mass = mass
         self.color = color
-        self.angle = pi / 4  # Initial angle (45 degrees)
+        self.angle = 0
         self.angular_velocity = 0  # Initial angular velocity
         self.angular_acceleration = 0  # Initial angular acceleration
     
@@ -27,7 +27,7 @@ class Pendulum:
             v (float): Linear velocity of the pendulum bob.
         """
         gravity = -9.81  # m/s^2
-        friction_coefficient = 0.60
+        friction_coefficient = 60
         torque = gravity * self.mass * self.length * sin(self.angle) - friction_coefficient * self.angular_velocity
         moment_of_inertia = self.mass * self.length ** 2
         self.angular_acceleration = torque / moment_of_inertia
@@ -52,6 +52,7 @@ class Pendulum:
         bob_y = y + self.length * cos(self.angle)
         pygame.draw.line(surface, self.color, (x, y), (bob_x, bob_y), 4)  # Rod
         pygame.draw.circle(surface, self.color, (int(bob_x), int(bob_y)), 10)  # Bob
+        pygame.draw.circle(surface, (0,0,0), (x, y), 8)  # axel
 
     def get_angle(self):
         """
