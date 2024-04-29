@@ -1,5 +1,4 @@
 import pygame
-import time
 from Pendulum import Pendulum
 from LinearMovement import LinearMovement
 
@@ -25,21 +24,14 @@ if __name__ == "__main__":
     SCREEN_WIDTH = 800
     SCREEN_HEIGHT = 600
     PENDULUM_LENGTH = 200
-    PENDULUM_MASS = 1
+    PENDULUM_MASS = 100
     
     running = True
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     pendulum = PendulumSystem(PENDULUM_LENGTH, PENDULUM_MASS)
-    last_time = time.time()
     x = 0
-
     while running:
-        current_time = time.time()
-        dt = (current_time - last_time) * 10 # diif in time since last fram * 10
-        
-        last_time = current_time
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -51,7 +43,7 @@ if __name__ == "__main__":
         if 200 < mouse_x < 600:
             x = mouse_x
 
-        pendulum.update(dt, x)
+        pendulum.update(1/120, x)
         screen.fill((0, 0, 0))  # Clear the screen
         pygame.draw.rect(screen, (120, 0, 0), pygame.Rect(0, 200, SCREEN_WIDTH, 100))
         pygame.draw.rect(screen, (20, 0, 0), pygame.Rect(180, 240, 440, 20))
